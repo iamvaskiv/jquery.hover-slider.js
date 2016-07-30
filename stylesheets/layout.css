@@ -1,0 +1,76 @@
+.main-content h1, .main-content h2, .main-content h3,
+.main-content h4, .main-content h5, .main-content h6 {
+  color: #39454a;
+}
+
+div[class*='demo-'] {
+  text-align: center;
+}
+
+ul {
+  position: relative;
+  list-style: none;
+  padding: 0;
+  display: inline-block;
+}
+
+ul:after {
+   visibility: hidden;
+   display: block;
+   font-size: 0;
+   content: " ";
+   clear: both;
+   height: 0;
+}
+
+.demo-1 ul {
+  background-color: rgba(112, 112, 112, 0.7);
+}
+
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  padding: 20px 30px;
+  font-size: 12px;
+  text-decoration: none !important;
+  position: relative;
+  z-index: 1;
+}
+
+.demo-1 a {
+  color: #fff !important;
+
+  text-transform: uppercase;
+}
+
+.hover-slider {
+  position: absolute;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.demo-1 .hover-slider {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.demo-2 ul li a {
+  color: #000;
+  font-size: 18px;
+  font-weight: 400;
+  padding: 10px 20px;
+}
+
+.demo-2 .hover-slider:before {
+  content: '';
+  display: block;
+  height: 2px;
+  position: absolute;
+  left: 10px;
+  right: 10px;
+  background-color: #000;
+  bottom: 0;
+}
