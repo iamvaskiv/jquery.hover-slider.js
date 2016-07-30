@@ -1,0 +1,1 @@
+# jquery.hover-slider.js
