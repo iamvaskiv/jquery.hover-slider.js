@@ -31,7 +31,7 @@
       this.$el        = $(this.el);
       this.$active    = this.$el.find('.' + this.options.activeElemClass);
       this.$children  = this.$el.children();
-      this.activeData = this.getActiveElemPosition();
+      this.activeData = this.getElementPosition(this.$active);
     },
 
     buildStructure: function () {
@@ -41,7 +41,9 @@
       .css({
         position: 'absolute',
         left: this.activeData.left,
-        width: this.activeData.width
+        top: this.activeData.top,
+        width: this.activeData.width,
+        height: this.activeData.height
       })
       .appendTo(this.$el);
     },
@@ -50,36 +52,42 @@
       var base = this;
 
       base.$children.mouseover(function () {
-        var self  = $(this),
-            width = self.width(),
-            left  = self.position().left;
+        var self = $(this),
+            pos  = base.getElementPosition(self);
 
         base.slider
           .stop()
           .animate({
-            left: left,
-            width: width
+            left: pos.left,
+            top: pos.top,
+            width: pos.width,
+            height: pos.height
           }, base.options.speed, base.options.easing);
       });
 
       base.$el.mouseleave(function () {
-        base.activeData = base.getActiveElemPosition();
+        base.$active = base.$el.find('.' + base.options.activeElemClass);
+        base.activeData = base.getElementPosition(base.$active);
 
         base.slider
           .stop()
           .animate({
             width: base.activeData.width,
-            left: base.activeData.left
+            height: base.activeData.height,
+            left: base.activeData.left,
+            top: base.activeData.top
           }, base.options.speed, base.options.easing);
       });
-    },
+    },  
 
-    getActiveElemPosition: function () {
-      this.$active = this.$el.find('.' + this.options.activeElemClass);
+    getElementPosition: function (elem) {
+      var $elem = $(elem);
 
       var activeData = {
-        left:  (this.$active.length) ? this.$active.position().left : 0,
-        width: (this.$active.length) ? this.$active.innerWidth() : 0
+        left:  ($elem.length) ? $elem.position().left : 0,
+        top:  ($elem.length) ? $elem.position().top : 0,
+        width: ($elem.length) ? $elem.innerWidth() : 0,
+        height: ($elem.length) ? $elem.innerHeight() : 0
       }
 
       return activeData;
